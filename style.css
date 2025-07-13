@@ -223,8 +223,7 @@ body {
 
 .controls-section {
     text-align: center;
-    margin: 20px 0;
-    padding: 20px;
+    padding: 30px 20px 0 20px;
     background: #f8fafc;
     border-radius: 8px;
 }
@@ -608,4 +607,98 @@ padding: 15px;
 border-radius: 8px;
 margin: 15px 0;
 border-left: 4px solid #059669;
+}
+
+.api-config {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 25px;
+}
+
+.api-config h3 {
+    margin: 0 0 15px 0;
+    color: #1e293b;
+    font-size: 1.1em;
+    font-weight: 600;
+}
+
+.api-config-content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.api-input-group {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.api-input-group input {
+    flex: 1;
+    padding: 10px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 14px;
+    background: white;
+}
+
+.api-input-group input:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.btn-small {
+    padding: 8px 16px;
+    font-size: 13px;
+    min-width: auto;
+}
+
+.api-status {
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.api-status.warning {
+    background: #fef3c7;
+    border: 1px solid #fbbf24;
+    color: #92400e;
+}
+
+.api-status.success {
+    background: #dcfce7;
+    border: 1px solid #16a34a;
+    color: #166534;
+}
+
+.api-status.error {
+    background: #fef2f2;
+    border: 1px solid #ef4444;
+    color: #b91c1c;
+}
+
+.api-config p a {
+    color: #3b82f6;
+    text-decoration: none;
+}
+
+.api-config p a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .api-input-group {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .api-input-group .btn-small {
+        width: 100%;
+        margin-top: 8px;
+    }
 }

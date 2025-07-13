@@ -1,10 +1,87 @@
-// ai-suggestions.js - Versão Corrigida
-const API_KEY = "AIzaSyCzPH1pBOXVUMCEVLWcvk7hpd3y9aNUgGs"; // Substitua pela sua chave real da API do Gemini
+function salvarChaveAPI() {
+    const apiKey = document.getElementById('apiKey').value.trim();
+    const statusDiv = document.getElementById('apiStatus');
+    
+    if (!apiKey) {
+        atualizarStatusAPI('error', '❌ Por favor, insira uma chave da API');
+        return;
+    }
+    
+    // Validação básica do formato da chave
+    if (!apiKey.startsWith('AIza') || apiKey.length < 20) {
+        atualizarStatusAPI('error', '❌ Formato de chave inválido');
+        return;
+    }
+    
+    // Salvar no localStorage
+    localStorage.setItem('gemini_api_key', apiKey);
+    
+    // Atualizar a variável global no arquivo ai-suggestions.js
+    if (typeof window.API_KEY !== 'undefined') {
+        window.API_KEY = apiKey;
+    }
+    
+    atualizarStatusAPI('success', '✅ Chave da API salva com sucesso');
+    
+    // Limpar o campo por segurança
+    document.getElementById('apiKey').value = '';
+}
+
+function limparAPI() {
+    localStorage.removeItem('gemini_api_key');
+    document.getElementById('apiKey').value = '';
+    atualizarStatusAPI('warning', '⚠️ Configure sua chave da API do Gemini para receber sugestões automáticas de critérios');
+}
+
+function atualizarStatusAPI(tipo, mensagem) {
+    const statusDiv = document.getElementById('apiStatus');
+    
+    // Remover classes anteriores
+    statusDiv.classList.remove('success', 'error', 'warning');
+    
+    // Aplicar novo status
+    statusDiv.classList.add(tipo);
+    statusDiv.textContent = mensagem;
+}
+
+// Carregar chave salva ao inicializar
+document.addEventListener('DOMContentLoaded', function() {
+    const savedKey = localStorage.getItem('gemini_api_key');
+    if (savedKey) {
+        // Atualizar a variável global
+        if (typeof window.API_KEY !== 'undefined') {
+            window.API_KEY = savedKey;
+        }
+        atualizarStatusAPI('success', '✅ Chave da API carregada e configurada');
+    }
+});
+
+// Função para obter a chave da API
+function getApiKey() {
+    // Primeiro tenta pegar do localStorage
+    const savedKey = localStorage.getItem('gemini_api_key');
+    if (savedKey) {
+        return savedKey;
+    }
+    
+    // Se não encontrar, usa a variável global (para compatibilidade)
+    if (typeof window.API_KEY !== 'undefined' && window.API_KEY !== "SUA_CHAVE_DE_API_AQUI") {
+        return window.API_KEY;
+    }
+    
+    return null;
+}
 
 async function sugerirCritériosGemini(titulo, descricao) {
     console.log('Iniciando sugestão de critérios...');
     console.log('Título:', titulo);
     console.log('Descrição:', descricao);
+    
+    const API_KEY = getApiKey();
+    
+    if (!API_KEY) {
+        throw new Error('Chave da API não configurada. Configure sua chave da API do Gemini.');
+    }
     
     const prompt = `Dado o seguinte problema de decisão:
 Título: "${titulo}"
@@ -96,7 +173,7 @@ Exemplo de resposta: Custo, Qualidade, Prazo, Localização, Facilidade de imple
 window.testarAPI = async function() {
     console.log('Testando configuração da API...');
     
-    if (API_KEY === "AIzaSyCzPH1pBOXVUMCEVLWcvk7hpd3y9aNUgGs" || API_KEY === "") {
+    if (API_KEY === "SUA_CHAVE_DE_API_AQUI" || API_KEY === "") {
         alert("Configure sua chave da API do Gemini no arquivo ai-suggestions.js");
         return;
     }

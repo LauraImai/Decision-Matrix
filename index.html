@@ -27,15 +27,34 @@
             <h1>🎯 Matriz de Decisão</h1>
             <p>Sistema automatizado para análise de decisões multicritério</p>
         </div>
-        
+
+        <!-- Configuração da API -->
+        <div class="api-config">
+            <h3>🤖 Configuração da IA (Opcional)</h3>
+            <div class="api-config-content">
+                <div class="api-input-group">
+                    <input type="password" id="apiKey" placeholder="Cole sua chave da API do Google Gemini aqui">
+                    <button class="btn btn-primary btn-small" onclick="salvarChaveAPI()">Salvar</button>
+                    <button class="btn btn-secondary btn-small" onclick="limparAPI()">Limpar</button>
+                </div>
+                <div id="apiStatus" class="api-status warning">
+                    ⚠️ Configure sua chave da API do Gemini para receber sugestões automáticas de critérios
+                </div>
+                <p style="font-size: 13px; color: #6b7280;">
+                    <strong>Como obter:</strong> Acesse <a href="https://aistudio.google.com/app/apikey" target="_blank">Google AI Studio</a> e crie uma chave gratuita
+                </p>
+            </div>
+        </div>
+
+
         <!-- Controles de Salvamento/Carregamento -->
         <div class="controls-section">
-            <h3>📁 Gerenciamento de Matrizes</h3>
-            <p style="color: #6b7280; margin-bottom: 15px;">
+            <small>
+            <p style="color: #6b7280;">
                 💾 <strong>Salvamento Automático:</strong> Suas alterações são salvas automaticamente
-            </p>
-            <button class="btn btn-secondary" onclick="carregarMatrizNomeada()">📂 Carregar Matriz Salva</button>
-            <button class="btn btn-secondary" onclick="excluirMatriz()">🗑️ Excluir Matriz</button>
+            </p>    
+            </small>
+            
         </div>
 
         <div class="content">

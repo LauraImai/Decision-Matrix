@@ -13,12 +13,14 @@ window.nextStep = async function() {
             return;
         }
         
+        const API_KEY = getApiKey();
+        
         // Verificar se a função de IA existe e se a API key está configurada
         if (typeof sugerirCritériosGemini === 'function') {
             // Verificar se API_KEY está definida e configurada
             if (typeof API_KEY === 'undefined') {
                 console.warn('API_KEY não está definida. Verifique se ai-suggestions.js foi carregado.');
-            } else if (API_KEY === "SUA_CHAVE_AQUI" || API_KEY === "") {
+            } else if (API_KEY === "SUA_CHAVE_DE_API_AQUI" || API_KEY === "") {
                 console.warn('API_KEY não foi configurada. Configure sua chave da API do Gemini.');
             } else {
                 try {
