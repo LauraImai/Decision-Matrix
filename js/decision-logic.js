@@ -1,10 +1,128 @@
-// Navegação entre passos
-function nextStep() {
-    if (validateCurrentStep()) {
-        document.getElementById(`step${currentStep}`).classList.remove('active');
-        currentStep++;
-        document.getElementById(`step${currentStep}`).classList.add('active');
+// Função para avançar para o próximo passo
+window.nextStep = async function() {
+    const activeStep = document.querySelector('.step.active');
+    const currentStepId = activeStep?.id;
+    
+    // Validação específica para o step1
+    if (currentStepId === 'step1') {
+        const titulo = document.getElementById('problemTitle').value;
+        const descricao = document.getElementById('problemDescription').value;
         
+        if (!titulo.trim()) {
+            alert("Por favor, insira um título para o problema.");
+            return;
+        }
+        
+        // Verificar se a função de IA existe e se a API key está configurada
+        if (typeof sugerirCritériosGemini === 'function') {
+            // Verificar se API_KEY está definida e configurada
+            if (typeof API_KEY === 'undefined') {
+                console.warn('API_KEY não está definida. Verifique se ai-suggestions.js foi carregado.');
+            } else if (API_KEY === "SUA_CHAVE_AQUI" || API_KEY === "") {
+                console.warn('API_KEY não foi configurada. Configure sua chave da API do Gemini.');
+            } else {
+                try {
+                    console.log('Iniciando busca de critérios...');
+                    
+                    // Mostrar loading ou feedback para o usuário
+                    const nextButton = document.querySelector('#step1 .btn-primary');
+                    const originalText = nextButton.textContent;
+                    nextButton.textContent = 'Buscando sugestões...';
+                    nextButton.disabled = true;
+                    
+                    const criteriosSugeridos = await sugerirCritériosGemini(titulo, descricao);
+                    
+                    console.log('Critérios recebidos:', criteriosSugeridos);
+                    
+                    // Restaurar o botão
+                    nextButton.textContent = originalText;
+                    nextButton.disabled = false;
+                    
+                    if (criteriosSugeridos && criteriosSugeridos.length > 0) {
+                        const confirmar = confirm(`A IA sugeriu os seguintes critérios:\n\n${criteriosSugeridos.join(", ")}\n\nDeseja adicionar esses critérios automaticamente?`);
+                        
+                        if (confirmar) {
+                            // Avançar para o step2 primeiro
+                            currentStep = 2;
+                            activeStep.classList.remove('active');
+                            document.getElementById('step2').classList.add('active');
+                            updateProgressBar();
+                            
+                            // Adicionar os critérios sugeridos usando a função do sistema
+                            if (typeof addCriteriaFromAI === 'function') {
+                                addCriteriaFromAI(criteriosSugeridos);
+                            } else {
+                                // Fallback: adicionar diretamente ao array se a função não existir
+                                criteriosSugeridos.forEach(criterio => {
+                                    if (typeof criteria !== 'undefined' && !criteria.includes(criterio)) {
+                                        criteria.push(criterio);
+                                    }
+                                });
+                                
+                                // Atualizar a lista visual
+                                if (typeof updateCriteriaList === 'function') {
+                                    updateCriteriaList();
+                                }
+                            }
+                            
+                            return; // Sair da função pois já avançamos
+                        }
+                    } else {
+                        console.log('Nenhum critério foi retornado pela IA');
+                    }
+                } catch (error) {
+                    console.error("Erro ao buscar critérios:", error);
+                    // Restaurar o botão em caso de erro
+                    const nextButton = document.querySelector('#step1 .btn-primary');
+                    nextButton.textContent = 'Continuar →';
+                    nextButton.disabled = false;
+                    // Continuar normalmente mesmo com erro na IA
+                }
+            }
+        } else {
+            console.warn('Função sugerirCritériosGemini não está disponível. Verifique se ai-suggestions.js foi carregado.');
+        }
+    }
+    
+    // Validação para outros steps (se necessário)
+    if (currentStepId === 'step2') {
+        const criteriaList = document.getElementById("criteriaList");
+        const hasItems = criteriaList.children.length > 0 && 
+                        !(criteriaList.children.length === 1 && criteriaList.children[0].tagName === 'P');
+        
+        if (!hasItems) {
+            alert("Por favor, adicione pelo menos um critério antes de continuar.");
+            return;
+        }
+    }
+    
+    if (currentStepId === 'step3') {
+        const alternativesList = document.getElementById("alternativesList");
+        const hasItems = alternativesList.children.length > 0 && 
+                        !(alternativesList.children.length === 1 && alternativesList.children[0].tagName === 'P');
+        
+        if (!hasItems) {
+            alert("Por favor, adicione pelo menos uma alternativa antes de continuar.");
+            return;
+        }
+    }
+    
+    // Avançar para o próximo passo
+    if (currentStep >= 6) {
+        return; // Não pode avançar além do último passo
+    }
+    
+    // Remover classe active do passo atual
+    activeStep.classList.remove('active');
+    
+    // Incrementar o passo
+    currentStep++;
+    
+    // Adicionar classe active ao próximo passo
+    const nextStep = document.getElementById(`step${currentStep}`);
+    if (nextStep) {
+        nextStep.classList.add('active');
+         
         if (currentStep === 4) {
             setupWeightingInterface();
         } else if (currentStep === 5) {
@@ -14,15 +132,42 @@ function nextStep() {
         }
         
         updateProgressBar();
+    } else {
+        // Fallback: se não encontrar o próximo passo, voltar ao atual
+        currentStep--;
+        activeStep.classList.add('active');
     }
-}
+};
 
-function prevStep() {
-    document.getElementById(`step${currentStep}`).classList.remove('active');
+// Função para voltar ao passo anterior
+window.prevStep = function() {
+    if (currentStep <= 1) {
+        return; // Não pode voltar do primeiro passo
+    }
+    
+    const activeStep = document.querySelector('.step.active');
+    if (!activeStep) {
+        return; // Nenhum passo ativo encontrado
+    }
+    
+    // Remover classe active do passo atual
+    activeStep.classList.remove('active');
+    
+    // Decrementar o passo
     currentStep--;
-    document.getElementById(`step${currentStep}`).classList.add('active');
-    updateProgressBar();
-}
+    
+    // Adicionar classe active ao passo anterior
+    const prevStep = document.getElementById(`step${currentStep}`);
+    if (prevStep) {
+        prevStep.classList.add('active');
+        updateProgressBar();
+    } else {
+        // Fallback: se não encontrar o passo, voltar ao step1
+        currentStep = 1;
+        document.getElementById('step1').classList.add('active');
+        updateProgressBar();
+    }
+};
 
 function updateProgressBar() {
     const progress = (currentStep - 1) / 5 * 100;

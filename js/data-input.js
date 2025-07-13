@@ -45,6 +45,28 @@ function updateCriteriaList() {
     list.innerHTML = html;
 }
 
+// Função para adicionar critérios da IA (compatível com o sistema existente)
+function addCriteriaFromAI(aiCriteria) {
+    let addedCount = 0;
+    
+    aiCriteria.forEach(criterio => {
+        const cleanCriterio = criterio.trim();
+        if (cleanCriterio && !criteria.includes(cleanCriterio)) {
+            criteria.push(cleanCriterio);
+            addedCount++;
+        }
+    });
+    
+    updateCriteriaList();
+    
+    if (addedCount > 0) {
+        showSuccess(`${addedCount} critério(s) da IA adicionado(s) com sucesso!`);
+    }
+    
+    return addedCount;
+}
+
+
 // Gerenciamento de alternativas
 function addAlternative() {
     const input = document.getElementById('alternativeInput');

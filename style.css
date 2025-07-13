@@ -255,3 +255,357 @@ body {
     margin: 1rem 0;
     border: 1px solid #fca5a5;
 }
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+body {
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+background: linear-gradient(135deg, #667eea 25%, #764ba2 75%);
+min-height: 100vh;
+padding: 20px;
+}
+
+.container {
+max-width: 1200px;
+margin: 0 auto;
+background: rgba(255, 255, 255, 0.95);
+border-radius: 20px;
+box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+overflow: hidden;
+}
+
+.header {
+background: linear-gradient(135deg, #4f46e5, #7c3aed);
+color: white;
+padding: 30px;
+text-align: center;
+}
+
+.header h1 {
+font-size: 2.5rem;
+margin-bottom: 10px;
+font-weight: 700;
+}
+
+.header p {
+font-size: 1.1rem;
+opacity: 0.9;
+}
+
+.content {
+padding: 40px;
+}
+
+.step {
+display: none;
+animation: fadeIn 0.5s ease-in;
+}
+
+.step.active {
+display: block;
+}
+
+@keyframes fadeIn {
+from { opacity: 0; transform: translateY(20px); }
+to { opacity: 1; transform: translateY(0); }
+}
+
+.step-header {
+background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+padding: 20px;
+border-radius: 15px;
+margin-bottom: 30px;
+border-left: 5px solid #4f46e5;
+}
+
+.step-title {
+font-size: 1.5rem;
+color: #1e293b;
+margin-bottom: 8px;
+font-weight: 600;
+}
+
+.step-description {
+color: #64748b;
+font-size: 1rem;
+}
+
+.form-group {
+margin-bottom: 25px;
+}
+
+label {
+display: block;
+margin-bottom: 8px;
+font-weight: 600;
+color: #374151;
+font-size: 1rem;
+}
+
+input[type="text"], input[type="number"], select, textarea {
+width: 100%;
+padding: 15px;
+border: 2px solid #e5e7eb;
+border-radius: 12px;
+font-size: 1rem;
+transition: all 0.3s ease;
+background: #fafafa;
+}
+
+input[type="text"]:focus, input[type="number"]:focus, select:focus, textarea:focus {
+outline: none;
+border-color: #4f46e5;
+background: white;
+box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+.btn {
+padding: 15px 30px;
+border: none;
+border-radius: 12px;
+font-size: 1rem;
+font-weight: 600;
+cursor: pointer;
+transition: all 0.3s ease;
+margin: 10px 5px;
+min-width: 120px;
+}
+
+.btn-primary {
+background: linear-gradient(135deg, #4f46e5, #7c3aed);
+color: white;
+}
+
+.btn-primary:hover {
+transform: translateY(-2px);
+box-shadow: 0 10px 25px rgba(79, 70, 229, 0.3);
+}
+
+.btn-secondary {
+background: #f1f5f9;
+color: #475569;
+border: 2px solid #e2e8f0;
+}
+
+.btn-secondary:hover {
+background: #e2e8f0;
+transform: translateY(-1px);
+}
+
+.btn-success {
+background: linear-gradient(135deg, #059669, #10b981);
+color: white;
+}
+
+.btn-success:hover {
+transform: translateY(-2px);
+box-shadow: 0 10px 25px rgba(5, 150, 105, 0.3);
+}
+
+.items-list {
+background: #f8fafc;
+border-radius: 12px;
+padding: 20px;
+margin: 20px 0;
+border: 2px solid #e2e8f0;
+}
+
+.item {
+background: white;
+padding: 15px;
+border-radius: 8px;
+margin-bottom: 10px;
+border-left: 4px solid #4f46e5;
+display: flex;
+justify-content: space-between;
+align-items: center;
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.item:last-child {
+margin-bottom: 0;
+}
+
+.remove-btn {
+background: #ef4444;
+color: white;
+border: none;
+padding: 8px 12px;
+border-radius: 6px;
+cursor: pointer;
+font-size: 0.875rem;
+transition: all 0.3s ease;
+}
+
+.remove-btn:hover {
+background: #dc2626;
+transform: scale(1.05);
+}
+
+.progress-bar {
+background: #e2e8f0;
+height: 8px;
+border-radius: 4px;
+margin: 20px 0;
+overflow: hidden;
+}
+
+.progress-fill {
+background: linear-gradient(135deg, #4f46e5, #7c3aed);
+height: 100%;
+border-radius: 4px;
+transition: width 0.5s ease;
+}
+
+.matrix-table {
+width: 100%;
+border-collapse: collapse;
+margin: 20px 0;
+background: white;
+border-radius: 12px;
+overflow: hidden;
+box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.matrix-table th {
+background: linear-gradient(135deg, #4f46e5, #7c3aed);
+color: white;
+padding: 15px;
+text-align: center;
+font-weight: 600;
+}
+
+.matrix-table td {
+padding: 12px;
+text-align: center;
+border-bottom: 1px solid #e2e8f0;
+}
+
+.matrix-table tr:nth-child(even) {
+background: #f9fafb;
+}
+
+.comparison-question {
+background: linear-gradient(135deg, #fef3c7, #fde68a);
+padding: 25px;
+border-radius: 15px;
+margin: 20px 0;
+border-left: 5px solid #f59e0b;
+}
+
+.question-text {
+font-size: 1.1rem;
+font-weight: 600;
+color: #92400e;
+margin-bottom: 15px;
+}
+
+.alternatives-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+gap: 15px;
+margin: 20px 0;
+}
+
+.alternative-card {
+background: white;
+padding: 20px;
+border-radius: 12px;
+border: 2px solid #e2e8f0;
+text-align: center;
+cursor: pointer;
+transition: all 0.3s ease;
+}
+
+.alternative-card:hover {
+border-color: #4f46e5;
+transform: translateY(-2px);
+box-shadow: 0 8px 20px rgba(79, 70, 229, 0.1);
+}
+
+.alternative-card.selected {
+border-color: #4f46e5;
+background: linear-gradient(135deg, #eef2ff, #e0e7ff);
+}
+
+.results {
+background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+padding: 30px;
+border-radius: 15px;
+margin: 20px 0;
+border-left: 5px solid #059669;
+}
+
+.results h3 {
+color: #065f46;
+margin-bottom: 20px;
+font-size: 1.3rem;
+}
+
+.ranking {
+list-style: none;
+}
+
+.ranking li {
+background: white;
+padding: 15px;
+margin: 10px 0;
+border-radius: 8px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.ranking-position {
+background: linear-gradient(135deg, #4f46e5, #7c3aed);
+color: white;
+width: 30px;
+height: 30px;
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+font-weight: 600;
+}
+
+.score {
+font-weight: 600;
+color: #059669;
+}
+
+.navigation {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-top: 30px;
+padding-top: 20px;
+border-top: 2px solid #e2e8f0;
+}
+
+.step-indicator {
+text-align: center;
+color: #64748b;
+font-size: 0.9rem;
+}
+
+.error-message {
+background: #fef2f2;
+color: #dc2626;
+padding: 15px;
+border-radius: 8px;
+margin: 15px 0;
+border-left: 4px solid #dc2626;
+}
+
+.success-message {
+background: #f0fdf4;
+color: #059669;
+padding: 15px;
+border-radius: 8px;
+margin: 15px 0;
+border-left: 4px solid #059669;
+}
