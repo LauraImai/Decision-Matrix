@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matriz de Decisão Automatizada</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 Matriz de Decisão</h1>
+            <p>Sistema automatizado para análise de decisões multicritério</p>
+        </div>
+        
+        <!-- Controles de Salvamento/Carregamento -->
+        <div class="controls-section">
+            <h3>📁 Gerenciamento de Matrizes</h3>
+            <p style="color: #6b7280; margin-bottom: 15px;">
+                💾 <strong>Salvamento Automático:</strong> Suas alterações são salvas automaticamente
+            </p>
+            <button class="btn btn-secondary" onclick="carregarMatrizNomeada()">📂 Carregar Matriz Salva</button>
+            <button class="btn btn-secondary" onclick="excluirMatriz()">🗑️ Excluir Matriz</button>
+        </div>
+
+        <div class="content">
+            <!-- Passo 1: Configuração Inicial -->
+            <div class="step active" id="step1">
+                <div class="step-header">
+                    <div class="step-title">📋 Configuração Inicial</div>
+                    <div class="step-description">Defina o problema de decisão e configure os parâmetros básicos</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="problemTitle">Título do Problema de Decisão:</label>
+                    <input type="text" id="problemTitle" placeholder="Ex: Escolha da localização para ginásio poliesportivo">
+                </div>
+                
+                <div class="form-group">
+                    <label for="problemDescription">Descrição (opcional):</label>
+                    <textarea id="problemDescription" rows="3" placeholder="Descreva brevemente o contexto da decisão..."></textarea>
+                </div>
+                
+                <div class="navigation">
+                    <div class="step-indicator">Passo 1 de 6</div>
+                    <button class="btn btn-primary" onclick="nextStep()">Continuar →</button>
+                </div>
+            </div>
+            
+            <!-- Passo 2: Critérios -->
+            <div class="step" id="step2">
+                <div class="step-header">
+                    <div class="step-title">⚖️ Definição dos Critérios</div>
+                    <div class="step-description">Adicione os critérios que serão utilizados para avaliar as alternativas</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="criterionInput">Nome do Critério:</label>
+                    <input type="text" id="criterionInput" placeholder="Ex: Localização do Terreno">
+                </div>
+                
+                <button class="btn btn-primary" onclick="addCriterion()">Adicionar Critério</button>
+                
+                <div class="items-list" id="criteriaList">
+                    <p style="color: #64748b; text-align: center;">Nenhum critério adicionado ainda</p>
+                </div>
+                
+                <div class="navigation">
+                    <button class="btn btn-secondary" onclick="prevStep()">← Voltar</button>
+                    <div class="step-indicator">Passo 2 de 6</div>
+                    <button class="btn btn-primary" onclick="nextStep()">Continuar →</button>
+                </div>
+            </div>
+            
+            <!-- Passo 3: Alternativas -->
+            <div class="step" id="step3">
+                <div class="step-header">
+                    <div class="step-title">🔄 Definição das Alternativas</div>
+                    <div class="step-description">Adicione as alternativas disponíveis para a decisão</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="alternativeInput">Nome da Alternativa:</label>
+                    <input type="text" id="alternativeInput" placeholder="Ex: Ao lado da Quadra">
+                </div>
+                
+                <button class="btn btn-primary" onclick="addAlternative()">Adicionar Alternativa</button>
+                
+                <div class="items-list" id="alternativesList">
+                    <p style="color: #64748b; text-align: center;">Nenhuma alternativa adicionada ainda</p>
+                </div>
+                
+                <div class="navigation">
+                    <button class="btn btn-secondary" onclick="prevStep()">← Voltar</button>
+                    <div class="step-indicator">Passo 3 de 6</div>
+                    <button class="btn btn-primary" onclick="nextStep()">Continuar →</button>
+                </div>
+            </div>
+            
+            <!-- Passo 4: Método de Pesagem -->
+            <div class="step" id="step4">
+                <div class="step-header">
+                    <div class="step-title">⚖️ Método de Pesagem</div>
+                    <div class="step-description">Escolha o método para determinar a importância dos critérios</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="weightingMethod">Selecione o Método de Pesagem:</label>
+                    <select id="weightingMethod">
+                        <option value="">Selecione um método...</option>
+                        <option value="adhoc">Método Ad-hoc (1)</option>
+                        <option value="ranksum">Método Rank-Sum (2)</option>
+                        <option value="roc">ROC - Rank Order Centroid (3)</option>
+                        <option value="swing">Método Swing (4)</option>
+                        <option value="swingweighting">Método Swing Weighting (5)</option>
+                    </select>
+                </div>
+                
+                <div id="weightingInterface"></div>
+                
+                <div class="navigation">
+                    <button class="btn btn-secondary" onclick="prevStep()">← Voltar</button>
+                    <div class="step-indicator">Passo 4 de 6</div>
+                    <button class="btn btn-primary" onclick="nextStep()">Continuar →</button>
+                </div>
+            </div>
+            
+            <!-- Passo 5: Avaliação por Comparação -->
+            <div class="step" id="step5">
+                <div class="step-header">
+                    <div class="step-title">📊 Avaliação das Alternativas</div>
+                    <div class="step-description">Compare as alternativas para cada critério usando o método de distância</div>
+                </div>
+                
+                <div id="comparisonInterface"></div>
+                
+                <div class="navigation">
+                    <button class="btn btn-secondary" onclick="prevStep()">← Voltar</button>
+                    <div class="step-indicator">Passo 5 de 6</div>
+                    <button class="btn btn-primary" onclick="nextStep()">Continuar →</button>
+                </div>
+            </div>
+            
+            <!-- Passo 6: Resultados -->
+            <div class="step" id="step6">
+                <div class="step-header">
+                    <div class="step-title">🏆 Resultados da Análise</div>
+                    <div class="step-description">Veja o ranking final das alternativas e a matriz completa</div>
+                </div>
+                
+                <div id="resultsInterface"></div>
+                
+                <div class="navigation">
+                    <button class="btn btn-secondary" onclick="prevStep()">← Voltar</button>
+                    <div class="step-indicator">Passo 6 de 6</div>
+                    <button class="btn btn-success" onclick="restart()">🔄 Nova Análise</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
