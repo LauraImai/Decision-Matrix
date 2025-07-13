@@ -1,6 +1,25 @@
 # 🎯 Matriz de Decisão Automatizada
 
+![Licença](https://img.shields.io/badge/license-MIT-blue.svg)
+![Status](https://img.shields.io/badge/status-concluído-green.svg)
+
+
 Este projeto tem como objetivo desenvolver uma **ferramenta web interativa** para **análise de decisões multicritério**, permitindo ao usuário inserir um problema de decisão, definir critérios e alternativas, escolher métodos de ponderação e visualizar os resultados finais automaticamente.
+
+**[➡️ Acessar a Demonstração](https://lauraimai.github.io/Decision-Matrix/)**
+
+
+---
+
+## 📚 Tabela de Conteúdo
+
+- [Objetivo do Projeto](#-objetivo-do-projeto)
+- [Funcionalidades](#-funcionalidades)
+- [Tecnologias Utilizadas](#️-tecnologias-utilizadas)
+- [Organização do Projeto](#-organização-do-projeto)
+- [Como Executar Localmente](#️-como-executar-localmente)
+- [Licença](#licença)
+- [Autores](#autores)
 
 ---
 

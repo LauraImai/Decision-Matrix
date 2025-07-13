@@ -702,3 +702,63 @@ border-left: 4px solid #059669;
         margin-top: 8px;
     }
 }
+
+footer {
+    background: transparent;
+    margin-top: 3rem;
+}
+
+.footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 2rem;
+    padding: 2rem 0.5rem;
+}
+
+.footer-section {
+    flex: 1;
+    min-width: 250px;
+}
+
+.footer-section h4 {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-bottom: 1rem;
+    position: relative;
+    padding-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.footer-section h4::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 2px;
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+}
+
+.footer-section p {
+    margin-bottom: 0.5rem;
+    color: #373636;
+}
+
+.footer-section a {
+    color: #373636;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-section a:hover {
+    color: #4f46e5;
+    text-decoration: underline;
+}
+
+.footer-bottom {
+    background: transparent;
+    text-align: center;
+    padding: 1rem 0;
+    font-size: 0.9rem;
+    color: white;
+}
