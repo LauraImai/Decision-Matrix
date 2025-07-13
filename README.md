@@ -82,16 +82,29 @@ Decision-Matrix/ # Diretório principal do projeto
 
 ## ▶️ Como Executar Localmente
 
-1. Clone o repositório:
+1. **Clone o repositório**
    ```bash
    git clone https://github.com/LauraImai/Decision-Matrix.git
    cd Decision-Matrix
    ```
 
-2. Abra o arquivo index.html em seu navegador (basta dar duplo clique).
+2. **Abra o arquivo index.html em seu navegador (basta dar duplo clique).**
 
    Nenhum servidor ou dependência é necessária. O projeto é 100% front-end.
 
+3. **Configure sua Chave de API do Gemini**
+    - Gere sua chave de API gratuita no [Google AI Studio](https://aistudio.google.com/app/apikey).
+    - Configure-a como uma variável de ambiente. **Não cole a chave diretamente no código.**
+      - No Windows (Prompt de Comando):
+        ```sh
+        setx GOOGLE_API_KEY "SUA_CHAVE_DE_API_AQUI"
+        ```
+        (Lembre-se de fechar e reabrir o terminal após executar este comando).
+      - No macOS/Linux:
+        ```sh
+        export GOOGLE_API_KEY="SUA_CHAVE_DE_API_AQUI"
+        ```
+     
 ---
 
 ## Licença
